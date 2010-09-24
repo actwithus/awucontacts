@@ -116,4 +116,7 @@ class Relationship(m.Model):
 
 class Interest(m.Model):
 
-    name = m.CharField(max_length=100)
+    name = m.CharField(max_length=100, unique=True)
+
+    def __unicode__(self):
+        return self.name
