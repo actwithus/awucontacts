@@ -7,23 +7,27 @@ import awucontacts.models as m
 class AddressInline(generic.GenericTabularInline):
 
     model = m.Address
+    extra = 1
 
 
 class PhoneInline(generic.GenericTabularInline):
 
     model = m.Phone
+    extra = 1
 
 
 class EmailInline(generic.GenericTabularInline):
 
     model = m.Email
+    extra = 1
 
 
-## This is not allowed since `who` and `whom` both point to `Contact`
+class RelationshipInline(generic.GenericTabularInline):
 
-# class RelationshipInline(admin.TabularInline):
-#
-#     model = m.Relationship
+    model = m.Relationship
+    ct_field = 'whom_content_type'
+    ct_fk_field = 'whom_object_id'
+    extra = 1
 
 
 class PersonAdmin(admin.ModelAdmin):
@@ -32,7 +36,7 @@ class PersonAdmin(admin.ModelAdmin):
         EmailInline,
         PhoneInline,
         AddressInline,
-        # RelationshipInline,
+        RelationshipInline,
         ]
 
 
@@ -42,7 +46,7 @@ class OrganizationAdmin(admin.ModelAdmin):
         EmailInline,
         PhoneInline,
         AddressInline,
-        # RelationshipInline,
+        RelationshipInline,
         ]
 
 
